@@ -42,6 +42,7 @@ services:
       EXCHANGE_RATES_COINMARKETCAP_COIN_ID: '15658'
       MICROSERVICE_VISUALIZE_SOL2UML_URL: 'http://host.docker.internal:8152/'
       MICROSERVICE_SIG_PROVIDER_URL: 'http://host.docker.internal:8151/'
+      API_RATE_LIMIT: 1000
     ports:
       - 4000:4000
     volumes:
