@@ -65,19 +65,19 @@ services:
 
   stats-db-init:
     extends:
-      file: ./services/docker-compose-stats.yml
+      file: ./services/docker-compose-stats-meer.yml
       service: stats-db-init
 
   stats-db:
     depends_on:
       - backend
     extends:
-      file: ./services/docker-compose-stats.yml
+      file: ./services/docker-compose-stats-meer.yml
       service: stats-db
 
   stats:
     depends_on:
       - stats-db
     extends:
-      file: ./services/docker-compose-stats.yml
+      file: ./services/docker-compose-stats-meer.yml
       service: stats

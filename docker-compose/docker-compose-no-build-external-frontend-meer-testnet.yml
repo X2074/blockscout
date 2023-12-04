@@ -1,10 +1,15 @@
-version: '3.8'
+version: '3.9'
 
 services:
   redis_db:
     extends:
       file: ./services/docker-compose-redis.yml
       service: redis_db
+
+  db-init:
+    extends:
+      file: ./services/docker-compose-db.yml
+      service: db-init
 
   db:
     extends:
@@ -41,6 +46,7 @@ services:
       CHAIN_ID: '8131'
       MICROSERVICE_VISUALIZE_SOL2UML_URL: 'http://host.docker.internal:8152/'
       MICROSERVICE_SIG_PROVIDER_URL: 'http://host.docker.internal:8151/'
+      API_RATE_LIMIT: 1000
     ports:
       - 4000:4000
     volumes:
@@ -56,16 +62,21 @@ services:
       file: ./services/docker-compose-sig-provider.yml
       service: sig-provider
 
+  stats-db-init:
+    extends:
+      file: ./services/docker-compose-stats-meer.yml
+      service: stats-db-init
+
   stats-db:
     depends_on:
       - backend
     extends:
-      file: ./services/docker-compose-stats.yml
+      file: ./services/docker-compose-stats-meer.yml
       service: stats-db
 
   stats:
     depends_on:
       - stats-db
     extends:
-      file: ./services/docker-compose-stats.yml
+      file: ./services/docker-compose-stats-meer.yml
       service: stats
